@@ -1,0 +1,31 @@
+.mainmenu {
+  padding: 1rem;
+  border: 3px solid white;
+  border-radius: 1rem;
+  font-family:
+    Rubik,
+    Times New Roman,
+    Helvetica,
+    sans-serif;
+  font-style: normal;
+}
+
+.mainmenu > ul {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  margin: 1rem;
+  font-family: Rubik;
+}
+
+.mainmenu > ul > li {
+  list-style: none;
+}
+
+.mainmenu > ul > li::before {
+  content: "--";
+}
+
+.mainmenu > ul > li::after {
+  content: "--";
+}
