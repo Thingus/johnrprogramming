@@ -31,25 +31,33 @@ interface BackgroundProps {
   height: number
 }
 
-interface DrawFunction {
-  canvas: HTMLCanvasElement
-  width: number
+type DrawFunction = (
+  canvas: HTMLCanvasElement,
+  width: number,
   height: number
-}
+) => void
 
-function randomSquares(params: DrawFunction) {
-  const context: CanvasRenderingContext2D = params.canvas.current.getContext('2d')
-  const tl_corner: Vec = { x: randomInt(params.width), y: randomInt(params.height) }
+function randomSquares(canvas: RefObject<HTMLCanvasElement>, width: number, height: number) {
+  console.log("drawing square")
+  const context: CanvasRenderingContext2D = canvas.current.getContext('2d')
+  const tl_corner: Vec = { x: randomInt(width), y: randomInt(height) }
   context.fillRect(tl_corner.x, tl_corner.y, 50, 50)
 }
 
 const Background = ({ width, height }: BackgroundProps) => {
 
   const canvas = useRef<HTMLCanvasElement>(null);
-  const [tick_timer, setTickTimer] = useState<TimerID>(-1)
-  const [tick_mode, setTickMode] = useState<TickMode>("manual")
-  const [tick_interval, setTickInterval] = useState<Milliseconds>(100)
-  const [draw_function, setDrawFunction] = useState<Function[DrawFunction]>(randomSquares({ canvas, width, height }))
+  const [tick_mode, setTickMode] = useState<TickMode>("auto");
+  const [tick_interval, setTickInterval] = useState<Milliseconds>(100);
+  // If you're using a function as state, you need a function that returns the function you want to use
+  const [draw_function, setDrawFunction] = useState<DrawFunction>(() => randomSquares);
+
+  // Tick
+  const handleTick = useCallback(() => {
+    console.log("handling tick")
+    draw_function(canvas, width, height)
+  }, [draw_function, canvas, width, height]
+  )
 
   // Initial load
   useEffect(() => {
@@ -64,7 +72,7 @@ const Background = ({ width, height }: BackgroundProps) => {
   useEffect(() => {
     let timer: Timeout;
     function start_timer() {
-      timer = setInterval(() => handleTick(), tick_interval)
+      timer = setInterval(handleTick, tick_interval)
     }
 
     function stop_timer() {
@@ -77,13 +85,6 @@ const Background = ({ width, height }: BackgroundProps) => {
 
   }, [tick_mode, handleTick, tick_interval])
 
-  // Tick
-  const handleTick = useCallback(() => {
-    if (canvas) {
-      draw_function({ canvas, width, height })
-    }
-  }, [draw_function, width, height]
-  )
 
   return (
     <canvas className={styles.backdrop} ref={canvas} width={width} height={height} onClick={handleTick} />
