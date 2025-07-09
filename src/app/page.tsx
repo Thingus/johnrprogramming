@@ -2,14 +2,16 @@
 import styles from "./page.module.css";
 import MainMenu from "./components/main_menu"
 import Background from "./components/background";
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useLayoutEffect, useState } from 'react'
 
 export default function Home() {
-  const [win_width, setWinWidth] = useState(100)
-  const [win_height, setWinHeight] = useState(100)
-  useEffect(() => {
-    setWinWidth(window.innerWidth)
-    setWinHeight(window.innerHeight)
+  const [win_width, setWinWidth] = useState(0)
+  const [win_height, setWinHeight] = useState(0)
+  useLayoutEffect(() => {
+    if (window.innerWidth > 0 && window.innerHeight > 0) {
+      setWinWidth(window.innerWidth)
+      setWinHeight(window.innerHeight)
+    }
 
   }, [])
   return (
@@ -17,6 +19,7 @@ export default function Home() {
       <Background width={win_width} height={win_height} />
       <main className={styles.main}>
         <MainMenu />
+
       </main>
       <footer className={styles.footer}></footer>
     </div>

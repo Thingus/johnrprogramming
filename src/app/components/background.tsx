@@ -55,7 +55,7 @@ const Background = ({ width, height }: BackgroundProps) => {
   // Tick
   const handleTick = useCallback(() => {
     console.log("handling tick")
-    draw_function(canvas, width, height)
+    if (width > 0 && height > 0) { draw_function(canvas, width, height) }
   }, [draw_function, canvas, width, height]
   )
 
