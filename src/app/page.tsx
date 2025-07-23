@@ -2,13 +2,13 @@
 import styles from "./page.module.css";
 import MainMenu from "./components/main_menu"
 import Background from "./components/background";
+import { Timeout } from "@node"
 import ControlPanel from "./components/control_panel"
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { RefObject } from 'react';
 import { fromUrl } from 'geotiff'
 import { useFlowmap } from './hooks/flowmap'
 import { LandscapeArtist } from "canvas_exploration";
-const PIXEL_SIZE = 5;
 
 export type DrawFunction = (
   canvas: CanvasRenderingContext2D,
@@ -43,10 +43,24 @@ const binDem = (dem_data: number[]) => {
   return new Uint8Array(dem_round.map((a) => a - min));
 };
 
+const calPixelSize = (win_height: number, win_width: number) => {
+  return 5
+  // const total_pixels = win_height * win_width
+  // switch (true) {
+  //   case total_pixels > 1000 * 2000: return 10
+  //   case total_pixels > 2000 * 1000: return 5
+  //   default: return 2
+  // }
+}
+
 
 export default function Home() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const flowmap_instance = useFlowmap()
+  const [pixel_size, setPixelSize] = useState<number>(10)
+  const [width_cells, setWidthCells] = useState<number>(0)
+  const [height_cells, setHeightCells] = useState<number>(0)
+  const [timer, setTimer] = useState<Timeout | null>(null)
   const [tick_mode, setTickMode] = useState<TickMode>("manual");
   const [tick_interval, setTickInterval] = useState<Milliseconds>(100);
   // If you're using a function as state, you need a function that returns the function you want to use
@@ -62,8 +76,9 @@ export default function Home() {
   useEffect(() => {
     setWinWidth(window.innerWidth)
     setWinHeight(window.innerHeight)
-    const width_cells = Math.floor(window.innerWidth / PIXEL_SIZE)
-    const height_cells = Math.floor(window.innerHeight / PIXEL_SIZE)
+    setPixelSize(calPixelSize(window.innerWidth, window.innerHeight))
+    setWidthCells(Math.floor(window.innerWidth / pixel_size))
+    setHeightCells(Math.floor(window.innerHeight / pixel_size))
     const left = 0
     const top = 0
     const right = left + width_cells
@@ -78,7 +93,7 @@ export default function Home() {
           return new LandscapeArtist(
             width_cells,
             height_cells,
-            PIXEL_SIZE,
+            pixel_size,
             dem_data
           )
         })
@@ -92,7 +107,7 @@ export default function Home() {
       })
       .catch((err) => console.warn(err))
 
-  }, [flowmap_instance])
+  }, [width_cells, height_cells, pixel_size, flowmap_instance])
 
   const handleTick = useCallback(() => {
     console.log("handling tick")
@@ -101,10 +116,30 @@ export default function Home() {
     background_artist?.draw(canvas.current?.getContext("2d") as CanvasRenderingContext2D)
   }, [background_artist])
 
-  useEffect(() => {
-    let timer: Timeout
-    setInterval(handleTick, 100)
+  const pauseCallback = useCallback(() => {
+    clearInterval(timer)
+  }, [timer])
+
+  const playCallback = useCallback(() => {
+    const timer = setInterval(handleTick, 100)
+    setTimer(timer)
   }, [handleTick])
+
+  const stepCallback = useCallback(() => {
+    background_artist?.tick()
+    background_artist?.draw(canvas.current?.getContext("2d") as CanvasRenderingContext2D)
+  }, [background_artist])
+
+  const resetCallback = useCallback(() => {
+    background_artist?.reset()
+    const new_spring_x = Math.floor(Math.random() * width_cells)
+    const new_spring_y = Math.floor(Math.random() * height_cells)
+    background_artist?.make_stream(new_spring_y, new_spring_x)
+    background_artist?.tick()
+    background_artist?.draw(canvas.current?.getContext("2d") as CanvasRenderingContext2D)
+
+  }, [background_artist, width_cells, height_cells])
+
 
   {/* <Background width={win_width} height={win_height} tick_mode={tick_mode} tick_interval={tick_interval} tick_func={draw_function} /> */ }
   return (
@@ -112,7 +147,8 @@ export default function Home() {
       <canvas ref={canvas} height={win_height} width={win_width} style={{ position: "absolute", left: "0", top: "0", zIndex: "-1" }}></canvas>
       <main className={styles.main}>
         <MainMenu />
-        <ControlPanel />
+        <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} />
+
       </main>
       <footer className={styles.footer}></footer>
     </div >

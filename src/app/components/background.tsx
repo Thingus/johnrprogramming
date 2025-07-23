@@ -3,15 +3,14 @@ import styles from "./background.module.css";
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Timeout } from 'node.js'
 import { TickMode, Milliseconds, DrawFunction } from "./../page"
-import init from "canvas_exploration"
+import { LandscapeArtist } from "canvas_exploration"
 
 interface BackgroundProps {
   width: number
   height: number
   tick_mode: TickMode
   tick_interval: Milliseconds
-  tick_func: DrawFunction
-  reset_func: Function
+  background_artist: LandscapeArtist
 }
 
 const Background = ({ width, height, tick_mode, tick_interval, tick_func, reset_func, step_func }: BackgroundProps) => {
