@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import MainMenu from "./components/main_menu"
 import Background from "./components/background";
 import ControlPanel from "./components/control_panel"
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { RefObject } from 'react';
 import { fromUrl } from 'geotiff'
 import { useFlowmap } from './hooks/flowmap'
@@ -13,6 +13,8 @@ const PIXEL_SIZE = 5;
 export type DrawFunction = (
   canvas: CanvasRenderingContext2D,
 ) => void
+
+export type TickFunction = () => void
 
 export type Milliseconds = number;
 export type TimerID = number;
@@ -43,11 +45,14 @@ const binDem = (dem_data: number[]) => {
 
 
 export default function Home() {
+  const canvas = useRef<HTMLCanvasElement>(null);
   const flowmap_instance = useFlowmap()
   const [tick_mode, setTickMode] = useState<TickMode>("manual");
   const [tick_interval, setTickInterval] = useState<Milliseconds>(100);
   // If you're using a function as state, you need a function that returns the function you want to use
-  const [draw_function, setDrawFunction] = useState<DrawFunction>(() => randomSquares);
+  // const [draw_function, setDrawFunction] = useState<DrawFunction>(() => { });
+  // const [tick_function, setTickFunction] = useState<TickFunction>(() => { });
+  const [background_artist, setBackgroundArtist] = useState<LandscapeArtist | null>(null)
   const [win_width, setWinWidth] = useState(1)
   const [win_height, setWinHeight] = useState(1)
 
@@ -78,24 +83,38 @@ export default function Home() {
           )
         })
       .then((landscape_artist) => {
-        setDrawFunction(() => landscape_artist.draw)
+        setBackgroundArtist(landscape_artist)
         setTickMode("manual")
+        landscape_artist.make_stream(74, 45)
         landscape_artist.tick()
         landscape_artist.tick()
-        landscape_artist.draw(Background.canvas)
+        landscape_artist.draw(canvas.current?.getContext("2d"))
       })
       .catch((err) => console.warn(err))
 
   }, [flowmap_instance])
 
+  const handleTick = useCallback(() => {
+    console.log("handling tick")
+    console.log(background_artist)
+    background_artist?.tick()
+    background_artist?.draw(canvas.current?.getContext("2d") as CanvasRenderingContext2D)
+  }, [background_artist])
+
+  useEffect(() => {
+    let timer: Timeout
+    setInterval(handleTick, 100)
+  }, [handleTick])
+
+  {/* <Background width={win_width} height={win_height} tick_mode={tick_mode} tick_interval={tick_interval} tick_func={draw_function} /> */ }
   return (
     <div className={styles.page}>
-      <Background width={win_width} height={win_height} tick_mode={tick_mode} tick_interval={tick_interval} tick_func={draw_function} />
+      <canvas ref={canvas} height={win_height} width={win_width} style={{ position: "absolute", left: "0", top: "0", zIndex: "-1" }}></canvas>
       <main className={styles.main}>
         <MainMenu />
         <ControlPanel />
       </main>
       <footer className={styles.footer}></footer>
-    </div>
+    </div >
   );
 }

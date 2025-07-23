@@ -12,7 +12,6 @@ interface BackgroundProps {
   tick_interval: Milliseconds
   tick_func: DrawFunction
   reset_func: Function
-  step_func: Function
 }
 
 const Background = ({ width, height, tick_mode, tick_interval, tick_func, reset_func, step_func }: BackgroundProps) => {
@@ -23,8 +22,7 @@ const Background = ({ width, height, tick_mode, tick_interval, tick_func, reset_
   // Tick
   const handleTick = useCallback(() => {
     console.log("handling tick")
-    init()
-      .then(() => tick_func(canvas.current?.getContext("2d") as CanvasRenderingContext2D))
+    tick_func(canvas.current?.getContext("2d") as CanvasRenderingContext2D)
   }, [tick_func])
 
   // Initial load
