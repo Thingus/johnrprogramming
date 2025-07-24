@@ -1,0 +1,36 @@
+body {
+  font-family: "Rubik", sans-serif;
+}
+
+.card_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 5px;
+  column-gap: 5px;
+}
+
+
+.card {
+  border: 1px solid grey;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.card > ul{ 
+  margin: 1em;
+}
+
+.video {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 5px;
+}
+
+@media screen and (orientation: portrait) {
+  .card_grid {
+    grid-template-columns: 1fr;
+  }
+  .video {
+    grid-template-columns: 1fr;
+  }
+}
