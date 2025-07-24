@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "deploy": "cp -r out/* ../../thingus.github.io && git commit -a",
     "start": "next start",
     "lint": "next lint"
   },
