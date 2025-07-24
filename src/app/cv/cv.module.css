@@ -1,4 +1,4 @@
-.cv_card_grid {
+.card_grid {
   font-family: Rubik, sans-serif;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -8,26 +8,26 @@
   column-gap: 0.5rem;
   line-height: 1.3em;
 }
-.cv_card {
+.card {
   border: 1px solid grey;
   padding: 1em;
   border-radius: 1em;
 }
-.cv_card > ul {
+.card > ul {
   margin: 1em;
 }
-.cv_card > h2 {
+.card > h2 {
   margin: 0.5em;
 }
-.cv_video {
+.video {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-gap: 5px;
   gap: 5px;
 }
 @media screen and (orientation: portrait) {
-  .cv_card_grid,
-  .cv_video {
+  .card_grid,
+  .video {
     grid-template-columns: 1fr;
   }
 }
