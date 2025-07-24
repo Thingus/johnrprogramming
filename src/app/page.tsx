@@ -1,11 +1,8 @@
 'use client'
 import styles from "./page.module.css";
 import MainMenu from "./components/main_menu"
-import Background from "./components/background";
-import { Timeout } from "@node"
 import ControlPanel from "./components/control_panel"
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { RefObject } from 'react';
 import { fromUrl } from 'geotiff'
 import { useFlowmap } from './hooks/flowmap'
 import { LandscapeArtist } from "canvas_exploration";
@@ -25,24 +22,13 @@ function randomInt(max: number) {
   return Math.floor(Math.random() * max)
 }
 
-type Vec = {
-  x: number
-  y: number
-}
-
-function randomSquares(canvas: RefObject<HTMLCanvasElement>, width: number, height: number) {
-  console.log("drawing square")
-  const context: CanvasRenderingContext2D = canvas.current.getContext('2d')
-  const tl_corner: Vec = { x: randomInt(width), y: randomInt(height) }
-  context.fillRect(tl_corner.x, tl_corner.y, 50, 50)
-}
-
 const binDem = (dem_data: number[]) => {
   const dem_round = dem_data.map((a) => Math.round(a));
   const min = Math.min(...dem_round);
   return new Uint8Array(dem_round.map((a) => a - min));
 };
 
+//eslint-disable-next-line
 const calPixelSize = (win_height: number, win_width: number) => {
   return 5
   // const total_pixels = win_height * win_width
@@ -60,9 +46,7 @@ export default function Home() {
   const [pixel_size, setPixelSize] = useState<number>(10)
   const [width_cells, setWidthCells] = useState<number>(0)
   const [height_cells, setHeightCells] = useState<number>(0)
-  const [timer, setTimer] = useState<Timeout | null>(null)
-  const [tick_mode, setTickMode] = useState<TickMode>("manual");
-  const [tick_interval, setTickInterval] = useState<Milliseconds>(100);
+  const [timer, setTimer] = useState<number | null>(null)
   // If you're using a function as state, you need a function that returns the function you want to use
   // const [draw_function, setDrawFunction] = useState<DrawFunction>(() => { });
   // const [tick_function, setTickFunction] = useState<TickFunction>(() => { });
@@ -98,12 +82,12 @@ export default function Home() {
           )
         })
       .then((landscape_artist) => {
+        if (!canvas || typeof (canvas) === "undefined") { throw ("Canvas not yet initialised") }
         setBackgroundArtist(landscape_artist)
-        setTickMode("manual")
         landscape_artist.make_stream(74, 45)
         landscape_artist.tick()
         landscape_artist.tick()
-        landscape_artist.draw(canvas.current?.getContext("2d"))
+        landscape_artist.draw(canvas!.current!.getContext("2d")!)
       })
       .catch((err) => console.warn(err))
 
@@ -117,11 +101,11 @@ export default function Home() {
   }, [background_artist])
 
   const pauseCallback = useCallback(() => {
-    clearInterval(timer)
+    if (timer) { window.clearInterval(timer) }
   }, [timer])
 
   const playCallback = useCallback(() => {
-    const timer = setInterval(handleTick, 100)
+    const timer = window.setInterval(handleTick, 100)
     setTimer(timer)
   }, [handleTick])
 
@@ -132,8 +116,8 @@ export default function Home() {
 
   const resetCallback = useCallback(() => {
     background_artist?.reset()
-    const new_spring_x = Math.floor(Math.random() * width_cells)
-    const new_spring_y = Math.floor(Math.random() * height_cells)
+    const new_spring_x = randomInt(width_cells)
+    const new_spring_y = randomInt(height_cells)
     background_artist?.make_stream(new_spring_y, new_spring_x)
     background_artist?.tick()
     background_artist?.draw(canvas.current?.getContext("2d") as CanvasRenderingContext2D)

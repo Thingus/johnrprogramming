@@ -2,14 +2,13 @@
 // src/useWasm.js
 import { useEffect, useState } from 'react';
 import init from 'canvas_exploration'
+import { InitOutput } from 'canvas_exploration';
 
 export const useFlowmap = () => {
-  const [wasm_instance, setWasmInstance] = useState(null);
+  const [wasm_instance, setWasmInstance] = useState<InitOutput | null>(null);
   useEffect(() => {
     init().then((instance) => setWasmInstance(instance))
   }, []);
   return wasm_instance;
 }
-
-
 

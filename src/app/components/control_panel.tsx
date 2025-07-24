@@ -1,10 +1,10 @@
 import styles from "./control_panel.module.css"
 
 interface ControlPanelProps {
-  play_callback: Function
-  pause_callback: Function
-  reset_callback: Function
-  step_callback: Function
+  play_callback: () => void
+  pause_callback: () => void
+  reset_callback: () => void
+  step_callback: () => void
 }
 
 export default function ControlPanel({ play_callback, pause_callback, reset_callback, step_callback }: ControlPanelProps) {

@@ -108,7 +108,7 @@ export default function CV() {
           >Postgraduate researcher at the Department of Cybernetics,
             University of Reading (2011-2016)</em
           >: I was working towards a PhD in terahertz spectroscopy of solvation
-          shells; an experimental research program using the UoR's dispersive
+          shells; an experimental research program using the UoR&apos;s dispersive
           Fourier transform spectrometer (DFTS). As part of this research I
           overhauled the DFTS control system, prototyped a novel sample cell and
           carried out measurements of samples.
@@ -137,7 +137,7 @@ export default function CV() {
         </li>
         <li>
           Database technologies: I have implemented small databases mainly in
-          PostgreSQL and MySQL, and contributed patches to Flowminder's main
+          PostgreSQL and MySQL, and contributed patches to Flowminder&apos;s main
           cellular data record processing toolkit. I have also worked briefly in
           Oracle and recently reimplemented a database in Access as a personal
           favour.
@@ -149,7 +149,7 @@ export default function CV() {
         </li>
         <li>
           Security: I have worked with Auth0 and implemented secure APIs. I also
-          implemented a JWT-powered scope-checking system for Flowminder's main
+          implemented a JWT-powered scope-checking system for Flowminder&apos;s main
           query engine.
         </li>
       </ul>
