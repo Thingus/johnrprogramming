@@ -80,5 +80,15 @@ export default function CV() {
 </ul>
     </div>
     
+    <div className={styles.card}>
+      <h2>Links</h2>
+<ul>
+<li><a href="johnrprogramming.com">Personal website</a></li>
+<li><a href="https://github.com/Thingus">Personal github</a></li>
+<li><a href="https://github.com/flowminder">Flowminder github</a></li>
+<li><a href="https://github.com/clcr/">CLCR github</a></li>
+</ul>
+    </div>
+    
   </div>)
 }

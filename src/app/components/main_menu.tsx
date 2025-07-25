@@ -7,9 +7,9 @@ export default function MainMenu() {
         <li>
           <a href="/cv">CV</a>
         </li>
-        <li>
-          <a href="/backdrop">backdrop</a>
-        </li>
+        {/* <li> */}
+        {/*   <a href="/backdrop">backdrop</a> */}
+        {/* </li> */}
         <li>
           <a href="github.com/thingus">github</a>
         </li>
