@@ -11,7 +11,7 @@ export default function MainMenu() {
         {/*   <a href="/backdrop">backdrop</a> */}
         {/* </li> */}
         <li>
-          <a href="github.com/thingus">github</a>
+          <a href="https://github.com/thingus">github</a>
         </li>
 
       </ul>
