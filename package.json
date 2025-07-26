@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "canvas_exploration": "../../canvas_exploration/pkg/",
+    "canvas_exploration": "../../canvas_exploration/pkg",
     "crypto": "^1.0.1",
     "geotiff": "^2.1.4-beta.0",
     "next": "15.3.4",
