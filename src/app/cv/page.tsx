@@ -3,6 +3,10 @@ export default function CV() {
   return (<div className={styles.card_grid}>
     
     <div className={styles.card}>
+      <h2>Curriculum Vitae of John Roberts, BSc (hons), AFHEA</h2>
+    </div>
+    
+    <div className={styles.card}>
       <h2>Current role: backend engineer at Flowminder (2021-present)</h2>
 <p>I currently work at the <a href="www.flowminder.org">Flowminder Foundation</a>, a nonprofit that leverages large datasets for humanitarian ends. During my time there, I:</p>
 <ul>
@@ -52,7 +56,7 @@ export default function CV() {
 <ul>
 <li>Containerisation: Docker is my preferred container management engine, using Docker Compose for service management. I have touched on Docker Hive. I have no experience with Kubernertes.</li>
 <li>Data pipelines: During my work at Flowminder, I have been implementing batch processing pipelines using Airflow. I have implemented fanouts, mapped tasks and dynamically constructed DAGs using Papermill templates; I am also familiar with both Operator- and Task- styles of dag implementations.</li>
-<li>Workflow: I am experienced with Git, and my working environment is Bash + VSCode on Ubuntu. I have implemented automated testing pipelines on CircleCI, and am an occasional user of Makefiles.</li>
+<li>Workflow: I am experienced with Git, and my preferred editor is Neovim. I have implemented automated testing pipelines on CircleCI, and am an occasional user of Makefiles.</li>
 <li>Environment management: I am experienced with pip, pyenv, pipenv, conda and UV for Python, and am familiar with Node and NPM/Yarn for Javascript development.</li>
 <li>Cloud infrastructure: I have experience with Google Cloud and AWS, running managed compute instances, containerised apps and supplemental technologies including IAM, Terraform and hosted database services)</li>
 </ul>
@@ -66,27 +70,6 @@ export default function CV() {
 <li><em>International work:</em> Many of my projects have been in collaboration with international projects - I have worked with the Kenyan Forestry Service, CONFAOR, IPAM and the Mexican space agency, among others. I have experience identifying key technical partners to work with for delivering the most impact in limited projects.</li>
 <li><em>Presentation skills:</em> I have four years experience delivering undergraduate lectures. I have also presented research at academic conferences and delivered courses in professional settings.</li>
 <li><em>Teaching and mentorship:</em> In addition to my teaching experience, I have mentored junior engineers and run several courses for coworkers in good programming practice, version control and machine learning.</li>
-</ul>
-    </div>
-    
-    <div className={styles.card}>
-      <h2>Qualifications</h2>
-<ul>
-<li>BSC Robotics (2013)</li>
-<li>Associate Fellow of the College of Higher Education (2014)</li>
-<li>Cryogenic safety training (2013)</li>
-<li>Laser safety training (2014)</li>
-<li>Basic first aid (lapsed) (2016)</li>
-</ul>
-    </div>
-    
-    <div className={styles.card}>
-      <h2>Links</h2>
-<ul>
-<li><a href="johnrprogramming.com">Personal website</a></li>
-<li><a href="https://github.com/Thingus">Personal github</a></li>
-<li><a href="https://github.com/flowminder">Flowminder github</a></li>
-<li><a href="https://github.com/clcr/">CLCR github</a></li>
 </ul>
     </div>
     
