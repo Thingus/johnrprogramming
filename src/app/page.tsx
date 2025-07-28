@@ -124,6 +124,12 @@ export default function Home() {
 
   }, [background_artist, width_cells, height_cells])
 
+  const newSpringCallback = useCallback(() => {
+    const new_spring_x = randomInt(width_cells)
+    const new_spring_y = randomInt(height_cells)
+    background_artist?.make_stream(new_spring_y, new_spring_x)
+  }, [background_artist, width_cells, height_cells])
+
 
   {/* <Background width={win_width} height={win_height} tick_mode={tick_mode} tick_interval={tick_interval} tick_func={draw_function} /> */ }
   return (
@@ -131,7 +137,7 @@ export default function Home() {
       <canvas ref={canvas} height={win_height} width={win_width} style={{ position: "absolute", left: "0", top: "0", zIndex: "-1" }}></canvas>
       <main className={styles.main}>
         <MainMenu />
-        <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} />
+        <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} new_spring_callback={newSpringCallback} />
 
       </main>
       <footer className={styles.footer}></footer>
