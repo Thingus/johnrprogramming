@@ -1,11 +1,11 @@
 'use client'
 import styles from "./page.module.css";
-import MainMenu from "./components/main_menu"
 import ControlPanel from "./components/control_panel"
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { fromUrl } from 'geotiff'
 import { useFlowmap } from './hooks/flowmap'
 import { LandscapeArtist } from "canvas_exploration";
+import MainMenu from "./components/main_menu";
 
 export type DrawFunction = (
   canvas: CanvasRenderingContext2D,
@@ -40,7 +40,7 @@ const calPixelSize = (win_height: number, win_width: number) => {
 }
 
 
-export default function Home() {
+export default function Backdrop() {
   const canvas = useRef<HTMLCanvasElement>(null);
   const flowmap_instance = useFlowmap()
   const [pixel_size, setPixelSize] = useState<number>(10)
@@ -137,7 +137,6 @@ export default function Home() {
       <canvas ref={canvas} height={win_height} width={win_width} style={{ position: "absolute", left: "0", top: "0", zIndex: "-1" }}></canvas>
       <main className={styles.main}>
         <MainMenu />
-
       </main>
       <footer className={styles.footer}>
         <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} new_spring_callback={newSpringCallback} />
