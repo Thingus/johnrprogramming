@@ -1,4 +1,14 @@
 .control_panel {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.control_panel > button {
+  background-color: white;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 8px;
+  outline-style: none;
 }

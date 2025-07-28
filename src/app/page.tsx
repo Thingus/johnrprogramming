@@ -137,10 +137,11 @@ export default function Home() {
       <canvas ref={canvas} height={win_height} width={win_width} style={{ position: "absolute", left: "0", top: "0", zIndex: "-1" }}></canvas>
       <main className={styles.main}>
         <MainMenu />
-        <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} new_spring_callback={newSpringCallback} />
 
       </main>
-      <footer className={styles.footer}></footer>
+      <footer className={styles.footer}>
+        <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} new_spring_callback={newSpringCallback} />
+      </footer>
     </div >
   );
 }
