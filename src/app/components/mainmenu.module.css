@@ -10,6 +10,7 @@
   font-style: normal;
   color: white;
   text-align: center;
+  backdrop-filter: blur(60px) grayscale(50%);
 }
 
 .mainmenu > ul {
