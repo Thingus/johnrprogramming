@@ -1,0 +1,14 @@
+.explanation {
+  backdrop-filter: blur(30px);
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 80vw;
+  height: 70hv;
+  overflow-y: scroll;
+  overflow-x: hide;
+  position: sticky;
+}
+
+.explanation > ul {
+  list-style: inside;
+}
