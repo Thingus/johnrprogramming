@@ -823,7 +823,7 @@ caniuse-lite@^1.0.30001579:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001727.tgz#22e9706422ad37aa50556af8c10e40e2d93a8b85"
   integrity sha512-pB68nIHmbN6L/4C6MH1DokyR3bYqFwjaSs/sWDHGj4CTcFtQUQMuJftVwWkXq7mNWOybD3KhUv3oWHoGxgP14Q==
 
-canvas_exploration@../../canvas_exploration/pkg/:
+"canvas_exploration@file:../../canvas_exploration/pkg":
   version "0.1.0"
 
 chalk@^4.0.0:
