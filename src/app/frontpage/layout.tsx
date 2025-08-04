@@ -41,6 +41,7 @@ const calPixelSize = (win_height: number, win_width: number) => {
 
 export default function Backdrop({ children }: { children: ReactNode }) {
   const canvas = useRef<HTMLCanvasElement>(null);
+  const main = useRef<HTMLCanvasElement>(null);
   const flowmap_instance = useFlowmap()
   const [pixel_size, setPixelSize] = useState<number>(10)
   const [width_cells, setWidthCells] = useState<number>(0)
@@ -52,6 +53,7 @@ export default function Backdrop({ children }: { children: ReactNode }) {
   const [background_artist, setBackgroundArtist] = useState<LandscapeArtist | null>(null)
   const [win_width, setWinWidth] = useState(1)
   const [win_height, setWinHeight] = useState(1)
+  const [main_is_visible, setMainIsVisible] = useState(true)
 
   //Initial load; init the wasm module, get the window size and load the DEM, then set up the functions
   // Also by god we go a long way to avoid async calls in the client. I'm not even sure
@@ -129,16 +131,21 @@ export default function Backdrop({ children }: { children: ReactNode }) {
     background_artist?.make_stream(new_spring_y, new_spring_x)
   }, [background_artist, width_cells, height_cells])
 
+  const hideContentCallback = useCallback(() => {
+    setMainIsVisible(!main_is_visible)
+
+  }, [main_is_visible])
+
 
   {/* <Background width={win_width} height={win_height} tick_mode={tick_mode} tick_interval={tick_interval} tick_func={draw_function} /> */ }
   return (
     <div className={styles.page}>
       <canvas className={styles.backdrop} ref={canvas} height={win_height} width={win_width} ></canvas>
-      <main className={styles.main}>
+      <main className={styles.main} ref={main} style={{ visibility: main_is_visible ? 'visible' : 'hidden' }}>
         {children}
       </main>
       <footer className={styles.footer}>
-        <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} new_spring_callback={newSpringCallback} />
+        <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} new_spring_callback={newSpringCallback} hide_content_callback={() => setMainIsVisible(!main_is_visible)} />
       </footer>
     </div >
   );

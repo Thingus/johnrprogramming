@@ -8,8 +8,19 @@
   overflow-x: hide;
   position: sticky;
   border: 3px solid white;
+  line-height: 1.3em;
 }
 
+.explanation > h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.explanation > h2 {
+  padding-top: 0.5em;
+  padding-bottom: 0.2em;
+}
 .explanation > ul {
   list-style: inside;
+  line-height: 1.3em;
 }

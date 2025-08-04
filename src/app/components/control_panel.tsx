@@ -1,5 +1,6 @@
 import styles from "./control_panel.module.css"
 import Image from "next/image"
+import Link from "next/link"
 
 interface ControlPanelProps {
   play_callback: () => void
@@ -7,9 +8,10 @@ interface ControlPanelProps {
   reset_callback: () => void
   new_spring_callback: () => void
   step_callback: () => void
+  hide_content_callback: () => void
 }
 
-export default function ControlPanel({ play_callback, pause_callback, reset_callback, new_spring_callback, step_callback }: ControlPanelProps) {
+export default function ControlPanel({ play_callback, pause_callback, reset_callback, new_spring_callback, step_callback, hide_content_callback }: ControlPanelProps) {
 
   return (
     <div className={styles.control_panel}>
@@ -18,9 +20,11 @@ export default function ControlPanel({ play_callback, pause_callback, reset_call
       <button onClick={step_callback}><Image src="/step-icon.svg" alt="step" width={20} height={20} /></button>
       <button onClick={new_spring_callback}><Image src="/fountain-icon.svg" alt="new spring" width={20} height={20} /></button>
       <button onClick={reset_callback}><Image src="/undo-arrow-icon.svg" alt="reset" width={20} height={20} /></button>
+      <button onClick={hide_content_callback}><Image src="/half-visible-icon.svg" alt="hide content" width={20} height={20} /></button>
+      <Link href="/frontpage/main_menu"><button onClick={() => { }}><Image src="/home-icon.svg" alt="hide content" width={20} height={20} /></button></Link>
+
     </div>
   )
-
 }
 
 
