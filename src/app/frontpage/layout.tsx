@@ -131,12 +131,6 @@ export default function Backdrop({ children }: { children: ReactNode }) {
     background_artist?.make_stream(new_spring_y, new_spring_x)
   }, [background_artist, width_cells, height_cells])
 
-  const hideContentCallback = useCallback(() => {
-    setMainIsVisible(!main_is_visible)
-
-  }, [main_is_visible])
-
-
   {/* <Background width={win_width} height={win_height} tick_mode={tick_mode} tick_interval={tick_interval} tick_func={draw_function} /> */ }
   return (
     <div className={styles.page}>
