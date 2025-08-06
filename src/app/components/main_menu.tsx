@@ -6,7 +6,7 @@ export default function MainMenu() {
       <h1>John R Programming</h1>
       <ul>
         <li>
-          <Link href="/cv">CV</Link>
+          <Link href="/frontpage/cv">CV</Link>
         </li>
         <li>
           <Link href="/frontpage/explanation">backdrop</Link>

@@ -12,6 +12,7 @@
   text-decoration: underline;
 }
 .card {
+  backdrop-filter: blur(60px) grayscale(50%);
   border: 1px solid grey;
   padding: 1em;
   border-radius: 1em;

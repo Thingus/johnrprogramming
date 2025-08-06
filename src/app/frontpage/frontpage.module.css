@@ -48,6 +48,7 @@
   grid-row-start: 2;
   overflow-y: scroll;
   max-height: 70svh;
+  padding: 1em;
 }
 
 .main ol {
