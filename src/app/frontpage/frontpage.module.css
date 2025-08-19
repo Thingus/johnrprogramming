@@ -21,10 +21,11 @@
   --button-secondary-hover: #1a1a1a;
 
   display: grid;
-  grid-template-rows: 1fr 8fr 1fr;
+  grid-template-rows: 10svh auto 10svh;
   align-items: center;
   justify-items: center;
   min-height: 80svh;
+  max-height: 100svh;
   /* padding: 1em 1em 0.1em 1em; */
   gap: 32px;
   font-family: var(--font-geist-sans);
@@ -38,6 +39,12 @@
 
     --button-primary-hover: #ccc;
     --button-secondary-hover: #1a1a1a;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .page {
+    grid-template-rows: 0 auto 0.1fr;
   }
 }
 

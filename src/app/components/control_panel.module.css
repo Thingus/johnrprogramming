@@ -1,5 +1,5 @@
 .control_panel {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 2rem;
 }
@@ -11,4 +11,16 @@
   height: 2.5rem;
   padding: 8px;
   outline-style: none;
+}
+
+@media screen and (orientation: portrait) {
+  .control_panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+  .control_panel *:nth-child(n + 5) {
+    margin-left: 1.8rem;
+    margin-right: -1.8rem;
+  }
 }

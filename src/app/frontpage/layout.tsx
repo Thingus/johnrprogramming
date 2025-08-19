@@ -138,9 +138,9 @@ export default function Backdrop({ children }: { children: ReactNode }) {
       <main className={styles.main} ref={main} style={{ visibility: main_is_visible ? 'visible' : 'hidden' }}>
         {children}
       </main>
-      <footer className={styles.footer}>
+      <div className={styles.footer}>
         <ControlPanel pause_callback={pauseCallback} play_callback={playCallback} step_callback={stepCallback} reset_callback={resetCallback} new_spring_callback={newSpringCallback} hide_content_callback={() => setMainIsVisible(!main_is_visible)} />
-      </footer>
+      </div>
     </div >
   );
 }

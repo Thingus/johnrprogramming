@@ -81,5 +81,6 @@ export default function CV() {
       </ul>
     </div>
 
+
   </div>)
 }
