@@ -42,6 +42,14 @@
   .card_grid {
     font-size: smaller;
   }
+  .card > h1 {
+    margin: 0.5em;
+    line-height: 1em;
+  }
+  .card > h2 {
+    margin: 0.5em;
+    line-height: 1em;
+  }
 }
 
 @media print {
