@@ -15,7 +15,7 @@ export default function CV() {
     </div>
 
     <div className={styles.card}>
-      <h2>Current role: backend engineer at Flowminder (2021-present)</h2>
+      <h2>Previous role: backend engineer at Flowminder (2021-2025)</h2>
       <p>I currently work at the <a href="www.flowminder.org">Flowminder Foundation</a>, a nonprofit that leverages large mobile-phone derived datasets for humanitarian ends. I develop and maintain tools and pipelines to be deployed on remote servers hosted on MNO premises, with a very strong emphasis on preserving data subject anonymity and data security. This role has included:</p>
       <ul>
         <li>working to support the development of novel methods of tracking and communicating population displacement via mobile network operator data.</li>

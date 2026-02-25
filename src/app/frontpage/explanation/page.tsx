@@ -33,8 +33,6 @@ export default function Page() {
         <li>The artist module should be quite easy to make generic; this would mean that there could be a family of backdrops that could live here, all doing fun little celluar automata. I&apos;ve already got a Life implementation from following the wasm-rust tutorial - having a little gallery would be nice.</li>
 
       </ul>
-      <h2>Plea</h2>
-      I made this website in a few months to sharpen my React, Rust and deployment tools. If you&apos;ve read this far, I&apos;m currently looking for work as of August 2025 - if you like what you see, please get in touch at &ldquo;john [at] johnrprogramming.com&rdquo;.
       <br />
     </div>
 
